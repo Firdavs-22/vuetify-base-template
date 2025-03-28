@@ -16,8 +16,6 @@ export const useUserStore = defineStore('user', () => {
     const userData = localStorage.getItem('user')
     if (user) {
       user.value = JSON.parse(userData!) as User
-    } else {
-      // router.push('/login')
     }
   }
 
@@ -35,6 +33,8 @@ export const useUserStore = defineStore('user', () => {
     loadUserFromLocalStorage()
     if (!user.value) fetchUser().then(() => {
       console.log('User fetched')
+    }).catch(() => {
+        router.push('/login')
     })
     if (!user.value) throw new Error('User not found')
     return user.value

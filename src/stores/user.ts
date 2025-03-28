@@ -34,7 +34,7 @@ export const useUserStore = defineStore('user', () => {
     if (!user.value) fetchUser().then(() => {
       console.log('User fetched')
     }).catch(() => {
-        router.push('/login')
+        return router.push('/login')
     })
     if (!user.value) throw new Error('User not found')
     return user.value
